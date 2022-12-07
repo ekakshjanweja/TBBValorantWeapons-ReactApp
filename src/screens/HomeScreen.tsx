@@ -94,6 +94,16 @@ const HomeScreen = () => {
             Rifle
           </li>
           <li
+            className="p-4 "
+            onClick={() => {
+              setWeaponCategory("EEquippableCategory::Heavy");
+              handleDetails();
+              console.log(details);
+            }}
+          >
+            Heavy
+          </li>
+          <li
             className="p-4"
             onClick={() => {
               setWeaponCategory("EEquippableCategory::Sniper");
@@ -181,6 +191,16 @@ const HomeScreen = () => {
             <li
               className="p-4 border-b border-gray-100 border-opacity-10"
               onClick={() => {
+                setWeaponCategory("EEquippableCategory::Heavy");
+                handleDetails();
+                console.log(details);
+              }}
+            >
+              Heavy
+            </li>
+            <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
                 setWeaponCategory("EEquippableCategory::Sniper");
                 handleDetails();
                 console.log(details);
@@ -221,9 +241,12 @@ const HomeScreen = () => {
             </div>
           </div>
         ) : (
-          <div className="text-white w-full  mx-auto flex flex-col justify-center text-center">
+          <div className="text-white   mx-auto flex flex-col justify-center text-center">
             {weaponsData.map((weapon, index) => {
-              if (weapon["category"] === weaponCategory) {
+              if (
+                weapon["category"] === weaponCategory &&
+                weapon["category"] !== "EEquippableCategory::Melee"
+              ) {
                 return (
                   <div
                     className="flex justify-center py-10 "
@@ -231,10 +254,10 @@ const HomeScreen = () => {
                       console.log(weapon);
                     }}
                   >
-                    <div className="rounded-lg shadow-lg bg-[#0f0e0e] max-w-sm">
+                    <div className="rounded-lg shadow-lg bg-[#0f0e0e] max-w-sm  hover:bg-[#fa4454]">
                       <a href="#!">
                         <img
-                          className="rounded-t-lg pt-6"
+                          className="rounded-t-lg pt-6 px-10 "
                           src={weapon["displayIcon"]}
                           alt="error"
                         />
@@ -246,6 +269,18 @@ const HomeScreen = () => {
                         <p className="text-white text-base mb-4">
                           {weapon["category"]}
                         </p>
+                        <p className="text-white text-base mb-4 mx-auto">
+                          Creds: {weapon["shopData"]["cost"]}
+                        </p>
+                        <div className="flex flex-row">
+                          <p className="text-white text-base mb-4  mx-auto">
+                            Fire Rate: {weapon["weaponStats"]["fireRate"]}
+                          </p>
+                          <p className="text-white text-base mb-4 mx-auto">
+                            Magazine Capacity:{" "}
+                            {weapon["weaponStats"]["magazineSize"]}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
