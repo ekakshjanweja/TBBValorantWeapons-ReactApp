@@ -15,7 +15,9 @@ const HomeScreen = () => {
     setDetails(!details);
   };
 
-  const [weaponCategory, setWeaponCategory] = useState("All");
+  const [weaponCategory, setWeaponCategory] = useState(
+    "EEquippableCategory::Sidearm"
+  );
   const [weaponsData, setWeaponsData] = useState([]);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const HomeScreen = () => {
 
   const fetchApiData = async () => {
     try {
-      const response = await Axios.get(weaponsApi).then((result) => {
+      await Axios.get(weaponsApi).then((result) => {
         console.log(result.data.data[0].displayName);
         console.log(result.data.data);
         setWeaponsData(result.data.data);
@@ -41,21 +43,76 @@ const HomeScreen = () => {
           VALORANT.
         </h1>
         <ul className="hidden md:flex">
-          <li
+          {/* <li
             className="p-4"
             onClick={() => {
+              setWeaponCategory("All");
               handleDetails();
               console.log(details);
             }}
           >
             All
+          </li> */}
+          <li
+            className="p-4"
+            onClick={() => {
+              setWeaponCategory("EEquippableCategory::Sidearm");
+              handleDetails();
+              console.log(details);
+            }}
+          >
+            Sidearms
           </li>
-          <li className="p-4">Sidearms</li>
-          <li className="p-4">Shotgun</li>
-          <li className="p-4">SMG</li>
-          <li className="p-4">Rifel</li>
-          <li className="p-4">Sniper</li>
-          <li className="p-4">Melee</li>
+          <li
+            className="p-4"
+            onClick={() => {
+              setWeaponCategory("EEquippableCategory::Shotgun");
+              handleDetails();
+              console.log(details);
+            }}
+          >
+            Shotgun
+          </li>
+          <li
+            className="p-4"
+            onClick={() => {
+              setWeaponCategory("EEquippableCategory::SMG");
+              handleDetails();
+              console.log(details);
+            }}
+          >
+            SMG
+          </li>
+          <li
+            className="p-4"
+            onClick={() => {
+              setWeaponCategory("EEquippableCategory::Rifle");
+              handleDetails();
+              console.log(details);
+            }}
+          >
+            Rifle
+          </li>
+          <li
+            className="p-4"
+            onClick={() => {
+              setWeaponCategory("EEquippableCategory::Sniper");
+              handleDetails();
+              console.log(details);
+            }}
+          >
+            Sniper
+          </li>
+          <li
+            className="p-4"
+            onClick={() => {
+              setWeaponCategory("EEquippableCategory::Melee");
+              handleDetails();
+              console.log(details);
+            }}
+          >
+            Melee
+          </li>
         </ul>
         <div onClick={handleNav} className="block md:hidden">
           {!nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -71,25 +128,76 @@ const HomeScreen = () => {
             VALORANT.
           </h1>
           <ul className="pr-8 pl-8 uppercase p-4">
-            <li className="p-4 border-b border-gray-100 border-opacity-10">
+            {/* <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
+                setWeaponCategory("All");
+                handleDetails();
+                console.log(details);
+              }}
+            >
               All
-            </li>
-            <li className="p-4 border-b border-gray-100 border-opacity-10">
+            </li> */}
+            <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
+                setWeaponCategory("EEquippableCategory::Sidearm");
+                handleDetails();
+                console.log(details);
+              }}
+            >
               Sidearms
             </li>
-            <li className="p-4 border-b border-gray-100 border-opacity-10">
+            <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
+                setWeaponCategory("EEquippableCategory::Shotgun");
+                handleDetails();
+                console.log(details);
+              }}
+            >
               Shotgun
             </li>
-            <li className="p-4 border-b border-gray-100 border-opacity-10">
+            <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
+                setWeaponCategory("EEquippableCategory::SMG");
+                handleDetails();
+                console.log(details);
+              }}
+            >
               SMG
             </li>
-            <li className="p-4 border-b border-gray-100 border-opacity-10">
+            <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
+                setWeaponCategory("EEquippableCategory::Sidearm");
+                handleDetails();
+                console.log(details);
+              }}
+            >
               Rifel
             </li>
-            <li className="p-4 border-b border-gray-100 border-opacity-10">
+            <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
+                setWeaponCategory("EEquippableCategory::Sniper");
+                handleDetails();
+                console.log(details);
+              }}
+            >
               Sniper
             </li>
-            <li className="p-4 ">Melee</li>
+            <li
+              className="p-4 border-b border-gray-100 border-opacity-10"
+              onClick={() => {
+                setWeaponCategory("EEquippableCategory::Melee");
+                handleDetails();
+                console.log(details);
+              }}
+            >
+              Melee
+            </li>
           </ul>
         </div>
       </div>
@@ -115,39 +223,36 @@ const HomeScreen = () => {
         ) : (
           <div className="text-white w-full  mx-auto flex flex-col justify-center text-center">
             {weaponsData.map((weapon, index) => {
-              return (
-                <div
-                  className="flex justify-center py-10 "
-                  onClick={() => {
-                    console.log(weapon);
-                  }}
-                >
-                  <div className="rounded-lg shadow-lg bg-[#0f0e0e] max-w-sm">
-                    <a href="#!">
-                      <img
-                        className="rounded-t-lg pt-6"
-                        src={weapon["displayIcon"]}
-                        alt="error"
-                      />
-                    </a>
-                    <div className="py-6">
-                      <h5 className="text-white text-xl font-medium mb-2">
-                        {weapon["displayName"]}
-                      </h5>
-                      <p className="text-white text-base mb-4">
-                        {weapon["category"]}
-                      </p>
+              if (weapon["category"] === weaponCategory) {
+                return (
+                  <div
+                    className="flex justify-center py-10 "
+                    onClick={() => {
+                      console.log(weapon);
+                    }}
+                  >
+                    <div className="rounded-lg shadow-lg bg-[#0f0e0e] max-w-sm">
+                      <a href="#!">
+                        <img
+                          className="rounded-t-lg pt-6"
+                          src={weapon["displayIcon"]}
+                          alt="error"
+                        />
+                      </a>
+                      <div className="py-6">
+                        <h5 className="text-white text-xl font-medium mb-2">
+                          {weapon["displayName"]}
+                        </h5>
+                        <p className="text-white text-base mb-4">
+                          {weapon["category"]}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                // <div key={weapon["uuid"]}>
-                //   <div className="  bg-[#110809]  max-w-sm rounded overflow-hidden shadow-lg">
-                //     <img src={weapon['displayIcon']} alt="" />
-                //     <p>{weapon["displayName"]}</p>
-
-                //   </div>
-                // </div>
-              );
+                );
+              } else {
+                return <div></div>;
+              }
             })}
           </div>
         )}
